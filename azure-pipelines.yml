@@ -1,0 +1,63 @@
+# Docker
+# Build and push an image to Azure Container Registry
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- master
+
+resources:
+- repo: self
+
+variables:
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: 'a7a7b61c-8bcd-44ef-9e05-1143c82a3dcf'
+  imageRepository: 'todoapp'
+  containerRegistry: 'devtodocontainer.azurecr.io'
+  dockerfilePath: '$(Build.SourcesDirectory)/dockerfile'
+  tag: '$(Build.BuildId)'
+
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
+
+stages:
+- stage: Compile
+  displayName: Compile typescript
+  jobs:
+    - job: Compile
+      displayName: Compile react application
+      steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '16.x'
+          checkLatest: true
+      - task: CmdLine@2
+        inputs:
+          script: |
+            npm i
+      - task: CmdLine@2
+        inputs:
+          script: |
+            npm run build
+- stage: BuildDocker
+  displayName: Build and push stage
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Docker@2
+      displayName: Build image
+      inputs:
+        containerRegistry: '$(dockerRegistryServiceConnection)'
+        repository: '$(imageRepository)'
+        command: 'build'
+        Dockerfile: '**/dockerfile'
+        tags: '$(tag)'
+        arguments: '--build-arg VITE_SERVICE_URL=https://localhost:8080  --build-arg VITE_CLIENT_ID=acef7da7-ea97-4485-9996-526561d6965f --build-arg VITE_REDIRECT_URL=https://localhost:8081'
+    - task: Docker@2
+      displayName: Push image
+      inputs:
+        containerRegistry: '$(dockerRegistryServiceConnection)'
+        repository: '$(imageRepository)'
+        command: 'push'
