@@ -34,7 +34,7 @@ stages:
         inputs:
           script: |
             npm run build
-- stage: Build Docker
+- stage: BuildDocker
   displayName: Build and push stage
   jobs:
   - job: Build
