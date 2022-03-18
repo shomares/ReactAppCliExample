@@ -1,0 +1,1 @@
+docker build . --build-arg VITE_SERVICE_URL=https://localhost:8080  --build-arg VITE_CLIENT_ID=acef7da7-ea97-4485-9996-526561d6965f --build-arg VITE_REDIRECT_URL=https://localhost:8081 -t todoapp:local 
