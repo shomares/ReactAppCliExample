@@ -1,0 +1,31 @@
+:root{
+  --container-item-color : rgb(247, 246, 245);
+  --contaner-item-border : rgb(226, 226, 225);
+  --body-color : white;
+  --font-color: rgb(99, 99, 99);
+  --primary-color: rgb(235, 36, 192);
+  --secondary-color: rgb(226, 226, 225);
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html{
+  font-size: 10px;
+  font-family:   "Segoe UI";
+  overflow-x: hidden;
+}
+
+body{
+  background-color: var(--body-color);
+  color: var(--font-color);
+}
+
+@media screen and (max-width: 400px) {
+  html{
+      font-size: 6px;
+  }
+}

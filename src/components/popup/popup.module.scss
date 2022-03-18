@@ -1,0 +1,32 @@
+.wrapper{
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(4px);
+    opacity: .5;
+    position: fixed;
+    top:  0;
+    left: 0;
+}
+
+.popup{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    max-width: 40%;
+    height: auto;
+    padding: 3rem;
+    background-color: var(--body-color);
+    z-index: 2;
+    border-radius: 5px;
+    box-shadow: 10px 16px 38px 5px rgba(181,176,176,0.75);
+}
+
+@media (max-width: 800px) {
+    .popup{
+        width: 80%;
+        max-width: inherit;
+    }
+  }
+  
+

@@ -1,0 +1,10 @@
+.container-item{
+    &--completed {
+        border-left-color: rgb(160, 204, 1);
+    }
+
+    &--cancel{
+        border-left-color: red;
+    }  
+}
+

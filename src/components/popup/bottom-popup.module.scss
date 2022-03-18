@@ -1,0 +1,30 @@
+.container-bottom-popup{
+    background-color: var(--body-color);
+    width: 40%;
+    max-height: 300px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    z-index: 6;
+    padding: 3rem;
+    box-shadow: 10px 16px 38px 5px rgba(181,176,176,0.75);
+
+    .close-button{
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        cursor: pointer;
+        border: none;
+        background-color: var(--body-color);
+        color: var(--font-color);
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .container-bottom-popup{
+       width: 90%;
+    }
+  }
+  
