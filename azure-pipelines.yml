@@ -33,6 +33,10 @@ stages:
       - task: CmdLine@2
         inputs:
           script: |
+            npm i
+      - task: CmdLine@2
+        inputs:
+          script: |
             npm run build
 - stage: BuildDocker
   displayName: Build and push stage
