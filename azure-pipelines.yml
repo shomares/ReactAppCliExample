@@ -20,7 +20,21 @@ variables:
   vmImageName: 'ubuntu-latest'
 
 stages:
-- stage: Build
+- stage: Compile
+  displayName: Compile typescript
+  jobs:
+    - job: Compile
+      displayName: Compile react application
+      steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '6.x'
+          checkLatest: true
+      - task: CmdLine@2
+        inputs:
+          script: |
+            npm run build
+- stage: Build Docker
   displayName: Build and push stage
   jobs:
   - job: Build
@@ -29,11 +43,17 @@ stages:
       vmImage: $(vmImageName)
     steps:
     - task: Docker@2
-      displayName: Build and push an image to container registry
+      displayName: Build image
       inputs:
-        command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          $(tag)
+        containerRegistry: '$(dockerRegistryServiceConnection)'
+        repository: '$(imageRepository)'
+        command: 'build'
+        Dockerfile: '**/Dockerfile'
+        tags: '$(tag)'
+        arguments: '--build-arg VITE_SERVICE_URL=https://localhost:8080  --build-arg VITE_CLIENT_ID=acef7da7-ea97-4485-9996-526561d6965f --build-arg VITE_REDIRECT_URL=https://localhost:8081'
+    - task: Docker@2
+      displayName: Push image
+      inputs:
+        containerRegistry: '$(dockerRegistryServiceConnection)'
+        repository: '$(imageRepository)'
+        command: 'push'
