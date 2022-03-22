@@ -20,6 +20,6 @@
     "types": ["reflect-metadata"],
     
   },
-  "include": ["src"],
+  "include": ["src", "jest"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

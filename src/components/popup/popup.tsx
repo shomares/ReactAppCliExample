@@ -1,5 +1,5 @@
 import { motion, Variants } from "framer-motion";
-import { FC } from "react";
+import React, { FC } from "react";
 import usePopup from "./popup.hook";
 import Style from './popup.module.scss';
 

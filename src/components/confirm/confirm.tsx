@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import Style from './confirm.module.scss';
 import Popup from "../popup/popup";
 
@@ -11,7 +11,7 @@ export interface ConfirmProps {
 const confirm: FC<ConfirmProps> = ({ title, onAccept, onCancel, children }) => {
     return <Popup>
         <div className={Style['popup-container']}>
-            <h2>{title}</h2>
+            <h2 data--test-id="title">{title}</h2>
             {children}
         </div>
 
