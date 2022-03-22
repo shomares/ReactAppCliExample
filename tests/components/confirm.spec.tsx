@@ -23,11 +23,9 @@ describe('test-confirm', () => {
         container = null;
     });
 
-    test('validate mount calendar', async () => {
+    test('validate mount confirm', async () => {
         const onClick = ()=> {
-
         }
-
 
         act(() => {
             render(<Confirm title='Test' onAccept={onClick } onCancel={onClick}>
