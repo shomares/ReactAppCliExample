@@ -92,7 +92,6 @@ const Item: FC<ItemProps> = ({ item, onComplete, onDelete }) => {
                 <motion.div variants={headerAnimation} >
                     <h3>{item.title}</h3>
                     <p>{item.description}</p>
-                    <p>{isPresent ? 'Show' : 'False'}</p>
                 </motion.div>
 
             </motion.div>

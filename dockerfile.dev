@@ -1,0 +1,15 @@
+# Install depedencies
+FROM node:latest 
+
+# Copy package
+WORKDIR ./app
+COPY package.json .
+
+# Install dependencies
+RUN npm i
+
+# Copy everthing
+COPY . .
+
+# Run
+CMD ["npm", "run", "dev" , "--","--host"]
